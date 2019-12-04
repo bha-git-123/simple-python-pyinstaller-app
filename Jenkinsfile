@@ -26,8 +26,11 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
+                    
                 }
             }
+             slackSend (channel: '#mcms-iscp-developer', message: output , color: 'good', failOnError: true, teamDomain: 'gtsimi', token: 'VhvJjiqCgAWBQF5ZYiF2VIDR')
+			      slackUploadFile channel: "#mcms-iscp-developer", filePath: "results.xml",initialComment:  'Complete Report'
         }
         stage('Deliver') { 
             agent {
