@@ -29,8 +29,7 @@ pipeline {
                     
                 }
             }
-             slackSend (channel: '#mcms-iscp-developer', message: output , color: 'good', failOnError: true, teamDomain: 'gtsimi', token: 'VhvJjiqCgAWBQF5ZYiF2VIDR')
-			      slackUploadFile channel: "#mcms-iscp-developer", filePath: "results.xml",initialComment:  'Complete Report'
+             
         }
         stage('Deliver') { 
             agent {
@@ -47,5 +46,14 @@ pipeline {
                 }
             }
         }
+    
+    node {
+  sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+	slackSend (channel: '#mcms-iscp-developer', color: 'good', failOnError: true, teamDomain: 'gtsimi', token: 'VhvJjiqCgAWBQF5ZYiF2VIDR')
+  slackUploadFile filePath: '*.xml', initialComment:  'HEY HEY'
+}    
+    
     }
+	
+	
 }
