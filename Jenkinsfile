@@ -23,6 +23,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
+                    slackUploadFile filePath: '/root/.jenkins/workspace/py_demo/test-reports/results.xml', initialComment: 'text'
                 }
             }
         }
