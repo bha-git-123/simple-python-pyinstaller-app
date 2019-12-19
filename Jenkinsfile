@@ -23,7 +23,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
-                    slackUploadFile filePath: '/root/.jenkins/workspace/py_demo/test-reports/results.xml', initialComment: 'text'
+                    
                 }
             }
         }
@@ -39,6 +39,7 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
+                    slackUploadFile channel: "#automation" filePath: '/root/.jenkins/workspace/py_demo/test-reports/results.xml', initialComment: 'text'
                 }
             }
         }
