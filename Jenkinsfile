@@ -39,6 +39,8 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
+                    sh "echo hey > blah.txt"
+                    slackUploadFile channel: "#automation", filePath: '*.txt', initialComment:  'HEY HEY'
                     slackUploadFile channel: "#automation", filePath: '/root/.jenkins/workspace/py_demo/test-reports/results.xml', initialComment: 'text'
                 }
             }
