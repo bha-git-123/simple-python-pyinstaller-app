@@ -23,7 +23,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
-                    slackUploadFile channel: "#automation", filePath: '*.xml', initialComment: 'report file'
+                    slackUploadFile channel: "#automation", filePath: 'test-reports/results.xml', initialComment: 'report file'
                 }
             }
         }
@@ -35,12 +35,12 @@ pipeline {
             }
             steps {
                 sh 'pyinstaller --onefile sources/add2vals.py'
+                slackUploadFile channel: "#automation", filePath: 'sources/add2vals.py', initialComment: 'python report file'
             }
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
-                    sh "echo python app testing > test.txt"
-                    slackUploadFile channel: "#automation", filePath: '*.txt', initialComment:  'update'
+                    
                     
                 }
             }
