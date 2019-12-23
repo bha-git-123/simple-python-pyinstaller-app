@@ -40,6 +40,7 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
+                    slackUploadFile channel: "#automation", filePath: 'dist/add2vals', initialComment: 'python report file'
                     
                     
                 }
