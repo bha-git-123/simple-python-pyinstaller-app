@@ -23,7 +23,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
-                    slackUploadFile channel: "#automation", filePath: 'test-reports/results.xml', initialComment: 'report file'
+                    slackUploadFile channel: "#mcms-iscp-developers", filePath: 'test-reports/results.xml', initialComment: 'report file'
                 }
             }
         }
@@ -35,12 +35,12 @@ pipeline {
             }
             steps {
                 sh 'pyinstaller --onefile sources/add2vals.py'
-                slackUploadFile channel: "#automation", filePath: 'sources/add2vals.py', initialComment: 'python file'
+                slackUploadFile channel: "#mcms-iscp-developers", filePath: 'sources/add2vals.py', initialComment: 'python file'
             }
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
-                    slackUploadFile channel: "#automation", filePath: 'dist/add2vals', initialComment: 'python report file'
+                    slackUploadFile channel: "#mcms-iscp-developers", filePath: 'dist/add2vals', initialComment: 'python report file'
                     
                     
                 }
