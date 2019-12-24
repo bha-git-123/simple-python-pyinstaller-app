@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 sh 'pyinstaller --onefile sources/add2vals.py'
-                slackUploadFile channel: "#automation", filePath: 'sources/add2vals.py', initialComment: 'python report file'
+                slackUploadFile channel: "#automation", filePath: 'sources/add2vals.py', initialComment: 'python file'
             }
             post {
                 success {
